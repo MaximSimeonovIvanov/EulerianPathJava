@@ -16,4 +16,20 @@ public class EulerianPathDirectedEdgesAdjacencyList {
     public EulerianPathDirectedEdgesAdjacencyList(List<List<Integer>> graph){
         //initialize
     }
+
+    //това е "интерфейсът на класа", който определя последователността на операциите
+    public int[] getEulerianPath(){
+        /*set up();                     podgotovka
+        if(!graphHasEulerianPath())     proverka na neobhodimite uslovia
+            return null;
+        dfs(findStartNode));            namiram patya
+
+        proverka za palno obhojdane
+        if(path.size() != edgeCount+1)
+            return null;
+
+        преобразувам резултата
+        return convertPathToArray();
+        */
+    }
 }
