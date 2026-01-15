@@ -45,4 +45,24 @@ public class EulerianPath {
         //връщам резултата в удобен формат
         return convertPathToArray();
     }
+
+    //алгоритъмът започва с изчисляването на входящи и изходящи степени
+    private void calculateDegrees(){
+        inDegree = new int[vertices];
+        outDegree = new int[vertices];
+        edges = 0;
+
+        for (int from =0; from<vertices; from++){
+            for (int to : adjecencyList.get(from)){
+                //увеличавам входящата степен на to
+                inDegree[to]++;
+                //увеличавам изходящата степен на from
+                outDegree[from]++;
+                //броя общия брой ребра
+                edges++;
+            }
+        }
+    }
+
+    
 }
