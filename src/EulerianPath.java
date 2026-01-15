@@ -1,3 +1,4 @@
+import java.lang.reflect.GenericArrayType;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -64,5 +65,31 @@ public class EulerianPath {
         }
     }
 
-    
+    //proverka dali sashtestvuva Oilerov pat
+    private boolean hasEulerianPath(){
+        //ако няма ребра, няма и път
+        if (edges == 0) return false;
+
+        int startCandidates = 0; //върхове с out > in са входни точки
+        int endCandidates = 0;   //in > out са изходни точки
+
+        for (int i = 0; i < vertices; i++){
+            int difference = outDegree[i] - inDegree[i];
+
+            //ako razlikata e tvarde golyama, nyama Oilerov pat
+            if (difference > 1 || difference < -1){
+                return false;
+            }
+            if (difference == 1){
+                startCandidates++; //този връх може да е начало на Ойлеровия път
+            } else if (difference == -1){
+                endCandidates++;   //този може да е край
+            }
+        }
+
+        //1)ако всичко in = висчки out -> това е цикъл
+        //2)ако има 1 начален и 1 завършващ връх -> това е път
+        return (startCandidates==0 && endCandidates==0) ||
+                (startCandidates==1 && endCandidates==1);
+    }
 }
