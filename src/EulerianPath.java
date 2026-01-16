@@ -111,8 +111,19 @@ public class EulerianPath {
     }
 
     private void performDFS(int vertex){
-        
+        //докато текущият връх има изходящи ребра
+        while(outDegree[vertex]>0){
+            //vzemam sledvashto rebro ot kraya na spisaka
+            int nextVertex=adjecencyList.get(vertex).get(--outDegree[vertex]);
+            //продължавам рекурсивно
+            performDFS(nextVertex);
+        }
+
+        //няма повече ребра и добавям върха към пътя
+        path.addFirst(vertex);
     }
+
+    
 
 
 }
