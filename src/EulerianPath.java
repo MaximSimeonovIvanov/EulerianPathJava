@@ -148,4 +148,51 @@ public class EulerianPath {
     }
 
 
+
+    //PROBA
+    public static void main(String[] args){
+        List<List<Integer>> graph = createEmptyGraph(4);
+        addEdge(graph,0,1);
+        addEdge(graph,1,2);
+        addEdge(graph,2,3);
+        addEdge(graph,3,0);
+        addEdge(graph,0,2);
+        addEdge(graph,2,0);
+
+        EulerianPath solver = new EulerianPath(graph);
+        int[] path = solver.findEulerianPath();
+
+        if (path!=null){
+            System.out.print("Ойлеров път: ");
+            for (int vertex : path){
+                System.out.print(vertex+" ");
+            }
+            System.out.println();
+        } else {
+            System.out.println("Няма Ойлеров път.");
+        }
+
+        System.out.println();
+        System.out.println("Тест 1: Граф с Ойлеров цикъл");
+        List<List<Integer>> graph1 = createEmptyGraph(3);
+        addEdge(graph1, 0, 1);
+        addEdge(graph1, 1, 2);
+        addEdge(graph1, 2, 0);
+
+        EulerianPath solver1 = new EulerianPath(graph1);
+        int[] path1 = solver1.findEulerianPath();
+        System.out.println("Резултат: " + (path1 != null ? "Има път" : "Няма път"));
+
+        System.out.println("\nТест 2: Граф с Ойлеров път");
+        List<List<Integer>> graph2 = createEmptyGraph(4);
+        addEdge(graph2, 0, 1);
+        addEdge(graph2, 1, 2);
+        addEdge(graph2, 2, 3);
+        addEdge(graph2, 3, 1);
+
+        EulerianPath solver2 = new EulerianPath(graph2);
+        int[] path2 = solver2.findEulerianPath();
+        System.out.println("Резултат: " + (path2 != null ? "Има път" : "Няма път"));
+    }
+
 }
