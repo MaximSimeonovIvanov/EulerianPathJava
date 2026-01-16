@@ -1,4 +1,4 @@
-import java.lang.reflect.GenericArrayType;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,14 +12,14 @@ public class EulerianPath {
     //това е за пътя
     private LinkedList<Integer> path;
     //графът чрез списък на съседство
-    private List<List<Integer>> adjecencyList;
+    private List<List<Integer>> adjacencyList;
 
     //конструктор и инициализация
     public EulerianPath(List<List<Integer>> graph){
         if (graph == null) throw new IllegalArgumentException("GRAPH CANNOT BE NULL");
 
         this.vertices = graph.size();
-        this.adjecencyList = graph;
+        this.adjacencyList = graph;
         this.path = new LinkedList<>();
     }
 
@@ -54,7 +54,7 @@ public class EulerianPath {
         edges = 0;
 
         for (int from =0; from<vertices; from++){
-            for (int to : adjecencyList.get(from)){
+            for (int to : adjacencyList.get(from)){
                 //увеличавам входящата степен на to
                 inDegree[to]++;
                 //увеличавам изходящата степен на from
@@ -103,7 +103,7 @@ public class EulerianPath {
                 return i;
             }
             //иначе започвам от 1я връх с изходящи ребра
-            if (outDegree[i]>=0){
+            if (outDegree[i]>0){
                 start=i;
             }
         }
@@ -114,7 +114,7 @@ public class EulerianPath {
         //докато текущият връх има изходящи ребра
         while(outDegree[vertex]>0){
             //vzemam sledvashto rebro ot kraya na spisaka
-            int nextVertex=adjecencyList.get(vertex).get(--outDegree[vertex]);
+            int nextVertex=adjacencyList.get(vertex).get(--outDegree[vertex]);
             //продължавам рекурсивно
             performDFS(nextVertex);
         }
@@ -123,7 +123,29 @@ public class EulerianPath {
         path.addFirst(vertex);
     }
 
-    
+    //преобразувам резултата в ъдобен формат
+    private int[] convertPathToArray(){
+        int[] result = new int[path.size()];
+        int index=0;
+
+        for (int vertex : path){
+            result[index++]=vertex;
+        }
+        return result;
+    }
+
+    //създавам граф
+    public static List<List<Integer>> createEmptyGraph(int vertices){
+        List<List<Integer>> graph = new ArrayList<>(vertices);
+        for (int i=0;i<vertices;i++){
+            graph.add(new ArrayList<>());
+        }
+        return graph;
+    }
+
+    public static void addEdge(List<List<Integer>> graph, int from, int to){
+        graph.get(from).add(to);
+    }
 
 
 }
