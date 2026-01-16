@@ -92,4 +92,27 @@ public class EulerianPath {
         return (startCandidates==0 && endCandidates==0) ||
                 (startCandidates==1 && endCandidates==1);
     }
+
+    //след като знам, че има път, трябва да знам от къде да започна
+    private int findStartingVertex(){
+        int start = 0;
+
+        for (int i=0;i<vertices;i++){
+            //ako има връх с out-in=1, той трябва да е начало
+            if (outDegree[i] - inDegree[i] ==1){
+                return i;
+            }
+            //иначе започвам от 1я връх с изходящи ребра
+            if (outDegree[i]>=0){
+                start=i;
+            }
+        }
+        return start;
+    }
+
+    private void performDFS(int vertex){
+        
+    }
+
+
 }
